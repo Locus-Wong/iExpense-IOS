@@ -14,10 +14,12 @@ class User {
 }
 
 struct SecondView: View {
-    let name: String
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        Text("Hello \(name)!")
+        Button("Dismiss"){
+            dismiss()
+        }
     }
 }
 
@@ -34,7 +36,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showingSheet){
-            SecondView(name: "Locus")
+           SecondView()
         }
     }
 }
