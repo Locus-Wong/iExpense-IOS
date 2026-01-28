@@ -27,6 +27,12 @@ struct AddView: View {
                 TextField("Amount", value: $amount, format: .currency(code: "USD"))
             }
             .navigationTitle("Add new expense")
+            .toolbar{
+                Button("Save"){
+                    let item = ExpenseItem(name: name, type: type, amount: amount)
+                    expenses.items.append(item)
+                }
+            }
         }
     }
 }
