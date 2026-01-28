@@ -41,10 +41,23 @@ struct ContentView: View {
     @State private var showingAddExpense = false
     
     var body: some View{
+        
         NavigationStack{
             List{
                 // no need to provide id in ForEach, since ExpenseItem is Identifiable
                 ForEach(expenses.items){item in
+                    var amountColor: Color {
+                        switch item.amount {
+                        case 0...20:
+                            return .green
+                        case 20...50:
+                            return .yellow
+                        case 50..<100:
+                            return .orange
+                        default:
+                            return .red
+                        }
+                    }
                     HStack{
                         VStack(alignment:.leading){
                             Text(item.name)
@@ -54,6 +67,7 @@ struct ContentView: View {
                         }
                         Spacer()
                         Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                            .foregroundStyle(amountColor)
                     }
                 }
                     .onDelete(perform: removeItems)
