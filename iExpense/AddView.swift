@@ -16,7 +16,7 @@ struct AddView: View {
     
     var expenses: Expenses
     
-    let types = ["Business", "Personal"]
+    let types = ["Personal", "Business"]
     var body: some View {
         NavigationStack{
             Form{
@@ -26,7 +26,7 @@ struct AddView: View {
                         Text($0)
                     }
                 }
-                TextField("Amount", value: $amount, format: .currency(code: "USD"))
+                TextField("Amount", value: $amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
             }
             .navigationTitle("Add new expense")
             .toolbar{
