@@ -44,7 +44,18 @@ struct ContentView: View {
         NavigationStack{
             List{
                 // no need to provide id in ForEach, since ExpenseItem is Identifiable
-                ForEach(expenses.items){item in Text(item.name)}
+                ForEach(expenses.items){item in
+                    HStack{
+                        VStack(alignment:.leading){
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                                .font(.footnote)
+                        }
+                        Spacer()
+                        Text(item.amount, format: .currency(code: "USD"))
+                    }
+                }
                     .onDelete(perform: removeItems)
             }
             .navigationTitle("iExpense")
